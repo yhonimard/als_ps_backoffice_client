@@ -21,6 +21,7 @@ import {
 import { Link } from "react-router";
 const menus = [
   { label: "Dashboard", icon: <Dashboard />, link: "/" },
+  { label: "Product", icon: <PointOfSale />, link: "product" },
   { label: "Penjualan", icon: <PointOfSale />, link: "penjualan" },
   { label: "Inventory", icon: <Inventory2 />, link: "inventory" },
   { label: "Pembelian", icon: <ShoppingCart />, link: "pembelian" },

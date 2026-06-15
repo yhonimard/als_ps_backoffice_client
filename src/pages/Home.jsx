@@ -18,7 +18,7 @@ const HomePage = () => {
             key={item}
             sx={{
               p: 3,
-              borderRadius: 3,
+            borderRadius: 3,
               backgroundColor: "#1E293B",
               border: "1px solid #334155",
             }}
