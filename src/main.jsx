@@ -33,14 +33,14 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <SnackbarProvider
-        autoHideDuration={1500}
-        anchorOrigin={{ horizontal: "right", vertical: "top" }}
-      >
+    <SnackbarProvider
+      autoHideDuration={1500}
+      anchorOrigin={{ horizontal: "right", vertical: "top" }}
+    >
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
         <App />
-      </SnackbarProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </SnackbarProvider>
   </QueryClientProvider>,
 );
