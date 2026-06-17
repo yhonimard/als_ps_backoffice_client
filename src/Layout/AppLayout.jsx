@@ -18,7 +18,6 @@ export default function AppLayout() {
         mobileOpen={mobileOpen}
         setMobileOpen={setMobileOpen}
       />
-      <Toolbar />
 
       <CDrawer
         drawerWidth={drawerWidth}

@@ -1,66 +1,112 @@
 import {
   Box,
   Paper,
-  Typography,
   Button,
   TextField,
   MenuItem,
   Toolbar,
+  Stack,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import ProductDrawer from "../components/product/ProductDrawer";
+import ProductTable from "../components/product/ProductTable";
+// import product from "../config/product";
+import ProductModal from "../components/product/ProductModal";
 import { useState } from "react";
+import { useFormik } from "formik";
+import { useQuery } from "@tanstack/react-query";
+import api from "../api";
+import { GET_PRODUCT_CATEGORY } from "../fixtures/api";
 
 export default function ProductPage() {
-  const [isOpenDrawer, setOpenDrawer] = useState(false);
+  const categoryQuery = useQuery({
+    queryKey: [GET_PRODUCT_CATEGORY],
+    queryFn: api.request.getProductCategory,
+  });
+
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      search: "",
+      category: "",
+      status: true,
+    },
+    onSubmit: () => {},
+  });
+
+
   return (
     <Box>
       <Toolbar />
       <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={3}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 3,
+        }}
       >
-        <Typography variant="h5" fontWeight={700}>
-          Products
-        </Typography>
-
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => setOpenDrawer(true)}
+          onClick={() => setIsOpenModal(true)}
         >
           Add Product
         </Button>
-        <ProductDrawer
-          onClose={() => setOpenDrawer(false)}
-          open={isOpenDrawer}
+        <ProductModal
+          onClose={() => setIsOpenModal(false)}
+          open={isOpenModal}
         />
       </Box>
 
-      <Paper sx={{ p: 2, mb: 2 }}>
-        <Box display="flex" gap={2} flexWrap="wrap">
-          <TextField label="Search Product" size="small" />
+      <Paper sx={{ p: 2, mb: 2, mt: 2 }}>
+        <Stack
+          display="flex"
+          spacing={2}
+          direction={`row`}
+          sx={{ flexWrap: "wrap" }}
+        >
+          <TextField
+            label="Search Product"
+            size="small"
+            name="search"
+            value={formik.values.search}
+            onChange={formik.handleChange}
+          />
 
           <TextField
-            select
+            select={true}
             label="Category"
             size="small"
-            sx={{ minWidth: 180 }}
+            sx={{ minWidth: 120 }}
+            name="category"
+            value={formik.values.category}
+            onChange={formik.handleChange}
           >
-            <MenuItem value="">All Categories</MenuItem>
+            {categoryQuery?.data?.map((d) => (
+              <MenuItem value={d.id}>{d.name}</MenuItem>
+            ))}
           </TextField>
 
-          <TextField select label="Status" size="small" sx={{ minWidth: 150 }}>
+          <TextField
+            label="Status"
+            select
+            size="small"
+            sx={{ minWidth: 100 }}
+            name="status"
+            value={formik.values.status}
+            onChange={formik.handleChange}
+          >
             <MenuItem value="">All</MenuItem>
             <MenuItem value="active">Active</MenuItem>
             <MenuItem value="inactive">Inactive</MenuItem>
           </TextField>
-        </Box>
+        </Stack>
       </Paper>
 
-      <Paper sx={{ p: 2 }}>Product DataTable Here</Paper>
+      <Paper sx={{ p: 2 }}>
+        <ProductTable />
+      </Paper>
     </Box>
   );
 }

@@ -6,6 +6,26 @@ const login = async (data) => {
 }
 
 
+const getProductCategory = async () => {
+  const res = await api.instance.request.get('/product/category')
+  return res.data
+}
+
+const getProduct = async () => {
+  const res = await api.instance.request.get("/product")
+  return res.data
+}
+
+const createProduct = async (data) => {
+  const res = await api.instance.request.post('/product')
+
+  return res.data
+}
+
+
 export default {
-  login
+  login,
+  getProductCategory,
+  createProduct,
+  getProduct
 }

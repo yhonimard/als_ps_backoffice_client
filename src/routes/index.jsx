@@ -15,7 +15,14 @@ const route = createBrowserRouter([
       </Unauthorized>
     ),
     children: [
-      { index: true, element: <HomePage /> },
+      {
+        index: true,
+        element: (
+          <Unauthorized>
+            <HomePage />
+          </Unauthorized>
+        ),
+      },
       { path: "penjualan", element: <>test</> },
       { path: "product", element: <ProductPage /> },
     ],

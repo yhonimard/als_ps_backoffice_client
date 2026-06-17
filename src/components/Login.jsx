@@ -12,9 +12,7 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useFormik } from "formik";
-import { useMutation } from "@tanstack/react-query";
-import api from "../api";
-import useLoginMutation from "../features/auth.mutation";
+import useLoginMutation from "../features/auth.query";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,7 +22,6 @@ export default function Login() {
       username: "",
       password: "",
     },
-
     onSubmit: async (data) => {
       mutate(data);
     },

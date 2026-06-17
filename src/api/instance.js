@@ -9,9 +9,10 @@ let token;
 const setup = _token => token = _token
 
 request.interceptors.request.use(config => {
-  if (!config.url.startsWith('/auth'))
-
+  if (config.url.startsWith('/product')) {
     config.headers.setAuthorization(`Bearer ${token}`)
+  }
+
   return config
 })
 
