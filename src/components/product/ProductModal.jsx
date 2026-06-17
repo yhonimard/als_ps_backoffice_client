@@ -17,8 +17,19 @@ import { useFormik } from "formik";
 import { useQuery } from "@tanstack/react-query";
 import { GET_PRODUCT_CATEGORY } from "../../fixtures/api";
 import api from "../../api";
+import productMutation from "../../features/product.mutation";
+import useProductStore from "../../store/product.store";
 
-export default function ProductModal({ open, onClose }) {
+export default function ProductModal() {
+  const isOpenModal = useProductStore((s) => s.isOpenModal);
+
+  const { mutate: createProduct } = productMutation.useCreateProduct();
+
+  const categoryQuery = useQuery({
+    queryKey: [GET_PRODUCT_CATEGORY],
+    queryFn: api.request.getProductCategory,
+  });
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -28,18 +39,23 @@ export default function ProductModal({ open, onClose }) {
       categoryName: "",
       variantName: "",
     },
-    onSubmit: (data) => {
-      console.log(data);
+    onSubmit: (data, { resetForm }) => {
+      createProduct(data, {
+        onSuccess: () => {
+          resetForm();
+        },
+      });
     },
   });
 
-  const categoryQuery = useQuery({
-    queryKey: [GET_PRODUCT_CATEGORY],
-    queryFn: api.request.getProductCategory,
-  });
+  const toggleModal = useProductStore((s) => s.toggleModal);
+
+  const onClose = () => {
+    toggleModal(false);
+  };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
+    <Dialog open={isOpenModal} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle
         sx={{
           display: "flex",
@@ -65,7 +81,7 @@ export default function ProductModal({ open, onClose }) {
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid xs={6}>
             <TextField
               fullWidth
               label="SKU"
@@ -75,7 +91,7 @@ export default function ProductModal({ open, onClose }) {
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid xs={6}>
             <TextField
               select
               fullWidth
@@ -86,12 +102,14 @@ export default function ProductModal({ open, onClose }) {
               value={formik.values.categoryName}
             >
               {categoryQuery.data?.map((data) => (
-                <MenuItem value={data.id}>{data.name}</MenuItem>
+                <MenuItem value={data.name} key={data.id}>
+                  {data.name}
+                </MenuItem>
               ))}
             </TextField>
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid xs={6}>
             <TextField
               fullWidth
               type="number"
@@ -102,7 +120,7 @@ export default function ProductModal({ open, onClose }) {
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid xs={6}>
             <TextField
               fullWidth
               label="variant"
@@ -112,7 +130,7 @@ export default function ProductModal({ open, onClose }) {
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid xs={6}>
             <FormControlLabel
               control={<Switch defaultChecked />}
               label="Active Product"

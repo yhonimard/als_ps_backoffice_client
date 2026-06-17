@@ -16,9 +16,9 @@ const getProduct = async () => {
   return res.data
 }
 
-const createProduct = async (data) => {
-  const res = await api.instance.request.post('/product')
 
+const createProduct = async (data) => {
+  const res = await api.instance.request.post('/product', data)
   return res.data
 }
 

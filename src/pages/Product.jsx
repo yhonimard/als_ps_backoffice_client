@@ -16,6 +16,7 @@ import { useFormik } from "formik";
 import { useQuery } from "@tanstack/react-query";
 import api from "../api";
 import { GET_PRODUCT_CATEGORY } from "../fixtures/api";
+import useProductStore from "../store/product.store";
 
 export default function ProductPage() {
   const categoryQuery = useQuery({
@@ -23,7 +24,7 @@ export default function ProductPage() {
     queryFn: api.request.getProductCategory,
   });
 
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const toggleModal = useProductStore((s) => s.toggleModal);
 
   const formik = useFormik({
     initialValues: {
@@ -31,9 +32,7 @@ export default function ProductPage() {
       category: "",
       status: true,
     },
-    onSubmit: () => {},
   });
-
 
   return (
     <Box>
@@ -49,14 +48,11 @@ export default function ProductPage() {
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => setIsOpenModal(true)}
+          onClick={() => toggleModal(true)}
         >
           Add Product
         </Button>
-        <ProductModal
-          onClose={() => setIsOpenModal(false)}
-          open={isOpenModal}
-        />
+        <ProductModal />
       </Box>
 
       <Paper sx={{ p: 2, mb: 2, mt: 2 }}>
@@ -89,17 +85,17 @@ export default function ProductPage() {
           </TextField>
 
           <TextField
+            select={true}
             label="Status"
-            select
             size="small"
-            sx={{ minWidth: 100 }}
+            sx={{ minWidth: 120 }}
             name="status"
             value={formik.values.status}
             onChange={formik.handleChange}
           >
-            <MenuItem value="">All</MenuItem>
-            <MenuItem value="active">Active</MenuItem>
-            <MenuItem value="inactive">Inactive</MenuItem>
+            <MenuItem value={``}>All</MenuItem>
+            <MenuItem value={true}>Active</MenuItem>
+            <MenuItem value={false}>Inactive</MenuItem>
           </TextField>
         </Stack>
       </Paper>

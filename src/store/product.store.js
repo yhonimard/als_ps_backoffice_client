@@ -1,11 +1,10 @@
 import { create } from "zustand"
 
 
-const productStore = create(set => ({
+const useProductStore = create(set => ({
   isOpenModal: false,
 
-
-  toggleModal: (payload) => set(s => ({ isOpenModal: payload }))
+  toggleModal: (payload) => set({ isOpenModal: payload })
 }))
 
-export default productStore
+export default useProductStore 
