@@ -90,7 +90,7 @@ const CDrawer = ({ setMobileOpen, mobileOpen, drawerWidth }) => {
           },
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-            backgroundColor: "#111827",
+            backgroundColor: "#1A1A1A",
           },
         }}
       >
@@ -111,8 +111,8 @@ const CDrawer = ({ setMobileOpen, mobileOpen, drawerWidth }) => {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
-            backgroundColor: "#111827",
-            borderRight: "1px solid #334155",
+            // backgroundColor: "#1A1A1A",
+            borderRight: "1px solid #3A3A3A",
           },
         }}
       >

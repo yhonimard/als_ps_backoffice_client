@@ -21,7 +21,7 @@ import productMutation from "../../features/product.mutation";
 import useProductStore from "../../store/product.store";
 
 export default function ProductModal() {
-  const isOpenModal = useProductStore((s) => s.isOpenModal);
+  const isOpenCreateModal = useProductStore((s) => s.isOpenCreateModal);
 
   const { mutate: createProduct } = productMutation.useCreateProduct();
 
@@ -48,14 +48,14 @@ export default function ProductModal() {
     },
   });
 
-  const toggleModal = useProductStore((s) => s.toggleModal);
+  const toggleCreateProductModal = useProductStore((s) => s.toggleCreateProductModal);
 
   const onClose = () => {
-    toggleModal(false);
+    toggleCreateProductModal(false);
   };
 
   return (
-    <Dialog open={isOpenModal} onClose={onClose} maxWidth="md" fullWidth>
+    <Dialog open={isOpenCreateModal} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle
         sx={{
           display: "flex",

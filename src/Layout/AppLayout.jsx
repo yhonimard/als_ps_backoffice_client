@@ -28,10 +28,11 @@ export default function AppLayout() {
       <Box
         component="main"
         sx={{
+          p: 2,
           flexGrow: 1,
           minHeight: "100vh",
-          backgroundColor: "#0F172A",
-          p: 3,
+          width: "50vh",
+          // backgroundColor: "#",
         }}
       >
         <Outlet />

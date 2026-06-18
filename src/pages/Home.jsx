@@ -19,8 +19,8 @@ const HomePage = () => {
             sx={{
               p: 3,
             borderRadius: 3,
-              backgroundColor: "#1E293B",
-              border: "1px solid #334155",
+              backgroundColor:   "#242424",
+              border: "1px solid #3A3A3A",
             }}
           >
             <Typography color="text.secondary">{item}</Typography>
@@ -48,8 +48,8 @@ const HomePage = () => {
             height: 400,
             p: 3,
             borderRadius: 3,
-            backgroundColor: "#1E293B",
-            border: "1px solid #334155",
+            backgroundColor: "#242424",
+            border : "1px solid #3A3A3A"
           }}
         >
           <Typography variant="h6" mb={2}>
@@ -62,8 +62,9 @@ const HomePage = () => {
             height: 400,
             p: 3,
             borderRadius: 3,
-            backgroundColor: "#1E293B",
-            border: "1px solid #334155",
+            backgroundColor: "#242424",
+            border : "1px solid #3A3A3A"
+
           }}
         >
           <Typography variant="h6" mb={2}>

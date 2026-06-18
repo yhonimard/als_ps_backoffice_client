@@ -5,18 +5,22 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SnackbarProvider } from "notistack";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 const theme = createTheme({
   palette: {
     mode: "dark",
 
     primary: {
-      main: "#00C853",
+      main: "#1B5E20",
     },
 
     background: {
-      default: "#0F172A",
-      paper: "#1E293B",
+      default: "#121212",
+      paper: "#242424",
     },
   },
 
@@ -25,7 +29,7 @@ const theme = createTheme({
   },
 
   typography: {
-    fontFamily: "Inter, Roboto, sans-serif",
+    fontFamily: "Roboto, sans-serif",
   },
 });
 

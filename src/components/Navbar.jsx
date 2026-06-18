@@ -14,8 +14,8 @@ const Navbar = ({ drawerWidth, setMobileOpen, mobileOpen }) => {
           ml: {
             md: `${drawerWidth}px`,
           },
-          backgroundColor: "#1E293B",
-          borderBottom: "1px solid #334155",
+          backgroundColor: "#242424",
+          borderBottom: "1px solid #3A3A3A",
         }}
       >
         <Toolbar>
